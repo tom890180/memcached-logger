@@ -1,8 +1,10 @@
+PIP dependencies
 ```
 pip install python-dotenv mysql-connector-python pymemcache
 ```
 
 
+MySQL
 ```
 CREATE TABLE `Log` (
 	`ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -23,4 +25,15 @@ CREATE TABLE `Log` (
 COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB
 ;
+```
+
+.env 
+```
+MYSQL_HOST=""
+MYSQL_DATABASE=""
+MYSQL_USERNAME=""
+MYSQL_PASSWORD=""
+
+MEMCACHED_IP=""
+MEMCACHED_PORT=
 ```
