@@ -1,0 +1,26 @@
+```
+pip install python-dotenv mysql-connector-python pymemcache
+```
+
+
+```
+CREATE TABLE `Log` (
+	`ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`Created` DATETIME NULL DEFAULT NULL,
+	`Uptime` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Used_Cache_Size` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Total_Connections` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Get_Cmd` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Set_Cmd` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Items_Evicted` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Bytes_Read` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Bytes_Written` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Current_Items` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Hits` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`Misses` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	PRIMARY KEY (`ID`) USING BTREE
+)
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+;
+```
