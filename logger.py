@@ -2,10 +2,11 @@ from dotenv import load_dotenv
 import mysql.connector as mysql
 from os import getenv
 from pymemcache.client import base
-from datetime import datetime
+import datetime
 
 if __name__ == "__main__":
     load_dotenv()
+
 
     client = base.Client((getenv("MEMCACHED_IP"), getenv("MEMCACHED_PORT")))
     stats = client.stats()
@@ -26,7 +27,7 @@ if __name__ == "__main__":
     )
 
     data = (
-        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         stats.get(b'uptime'),
         stats.get(b'bytes'),
         stats.get(b'total_connections'),
@@ -40,11 +41,13 @@ if __name__ == "__main__":
         stats.get(b'get_misses')
     )
 
-    try:
-        cursor.execute(insert, data)
-        db.commit()
+    cursor.execute(insert, data)
+    db.commit()
 
-    except:
-        db.rollback()
+    delete = ("DELETE FROM Log where Created < %s")
+    delete_date = datetime.datetime.now() - datetime.timedelta(days = 30 * 14)
+
+    cursor.execute(delete, (delete_date.strftime("%Y-%m-%d %H:%M:%S"),))
+    db.commit()
 
     db.close()
